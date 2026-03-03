@@ -11,7 +11,7 @@ import org.testng.Assert;
 
 import io.restassured.response.Response;
 
-
+//4.test, asserationet utlisant api request pour envoi req 
 //1.register
 
 public class UserCreateWithStringBodyTest {

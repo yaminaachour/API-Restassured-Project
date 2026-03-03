@@ -2,31 +2,34 @@ package com.qacart.todo.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-@JsonInclude(JsonInclude.Include.NON_NULL)
+
+@JsonInclude(JsonInclude.Include.NON_NULL)  // Les champs null ne sont pas envoyés
+
 //3.les objet json POJO : les modules des donnees  page -->pojo
 public class UserCreateWithSetters {
 
-	
+
+    // ══════════════════════════════════════════
+    // 📤 Champs de la REQUÊTE (ce que TU envoies)
+    // ══════════════════════════════════════════
+    // Register/Login
 	private String firstName;
 	private String lastName;
     private String email;
     private String password;
+    
+    // ══════════════════════════════════════════
+    //  Champs de la RÉPONSE (ce que l'API te renvoie)
+    // ══════════════════════════════════════════
+    //la réponse Login
+ 
+    @JsonProperty("access_token")   // "access_token" dans JSON → accessToken en Java
+    private String accessToken;
+    
+    @JsonProperty("userID")         // "userID" dans JSON → userId en Java
+    private String userId;
 	
-    @JsonProperty("access_token")
-    private String accessToken;  // Convention camelCase lzem ikounou nes eli 3na asami
-    public String getAccessToken() {
-		return accessToken;
-	}
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
-	}
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-	private String userId;  
+
     
 	public String getFirstName() {return firstName;}
 	public void setFirstName(String firstName) {this.firstName = firstName;}
@@ -40,7 +43,14 @@ public class UserCreateWithSetters {
 	public String getPassword() {return password;}
 	public void setPassword(String password) {this.password = password;}
 	
-	
-	
-	
+    // --- accessToken (de la réponse) ---
+    public String getAccessToken() { return accessToken; }
+    public void setAccessToken(String accessToken) { this.accessToken = accessToken; }
+
+    // --- userId (de la réponse) ---
+    public String getUserId() { return userId; }
+    public void setUserId(String userId) { this.userId = userId; }
 }
+	
+	
+

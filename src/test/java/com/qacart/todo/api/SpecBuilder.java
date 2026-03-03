@@ -13,6 +13,8 @@ import io.restassured.http.ContentType;
 public class SpecBuilder {
     
 
+	//1.centralise url(request/rep)
+	
 	 // ═══════════════════════════════════════════════════════════════
     // Pour requêtes JSON (POST/PUT/PATCH avec body JSON)
     // ═══════════════════════════════════════════════════════════════

@@ -4,6 +4,8 @@ import org.testng.annotations.Test;
 import org.testng.Assert;
 
 import com.qacart.todo.utils.FakerUtils;
+import com.qacart.todo.utils.TokenHolder;
+import com.qacart.todo.constants.EndPoint;
 import com.qacart.todo.api.ApiRequest;
 import com.qacart.todo.models.UserCreateWithSetters;
 
@@ -19,11 +21,11 @@ public class UserCreateWithSettersTest {
         UserCreateWithSetters user = new UserCreateWithSetters();
         user.setFirstName("Yamina");
         user.setLastName("Achour");
-        user.setEmail("yamina9@example.com");
+        user.setEmail("yamina10@example.com");
         user.setPassword("Abc@1236");
 
         // Envoyer la requête POST
-        Response response = ApiRequest.post("/api/v1/users/register", user);
+        Response response = ApiRequest.post(EndPoint.REGISTER.url, user);
 
         // Vérifications
         Assert.assertEquals(response.getStatusCode(), 201);
@@ -38,11 +40,11 @@ public void shouldBeAbleToLogin() {
     
     // Pour login: seulement email et password
     UserCreateWithSetters user = new UserCreateWithSetters();
-    user.setEmail("yamina9@example.com");
+    user.setEmail("yamina10@example.com");
     user.setPassword("Abc@1236");
 
 
-    Response response = ApiRequest.post("/api/v1/users/login", user);
+    Response response = ApiRequest.post(EndPoint.LOGIN.url, user);
 
     // Vérifications
     Assert.assertEquals(response.getStatusCode(), 200);
@@ -50,15 +52,14 @@ public void shouldBeAbleToLogin() {
     Assert.assertNotNull(response.path("access_token"));
     Assert.assertNotNull(response.path("userID"));
     
-    // 🔑 Récupérer le token pour les prochains tests
+  
  
-    
-    // Récupérer le token
     String accessToken = response.path("access_token");
-    System.out.println("✅ Login réussi! Token: " + accessToken);
  
-   
-
+    // STOCKER le token pour les prochains tests !
+    TokenHolder.setToken(accessToken);
+    System.out.println("✅ Login réussi! Token: " + accessToken);
+    
 }
 
 
@@ -98,7 +99,7 @@ public void userShouldBeRegisterwithfaker() {
     System.out.println("✅ Register réussi avec: " + generatedEmail);
 
 }    
-@Test(priority = 2)
+@Test(priority = 2) 
 public void shouldBeAbleToLoginfaker() {
     
     // ✅ Réutiliser email/password du register

@@ -10,7 +10,8 @@ import static io.restassured.RestAssured.given;
 public class ApiRequest extends SpecBuilder {
 
     // ═══════════════════════════════════════════════════════════
-    // 🟢 MÉTHODES SIMPLES (pour utilisation rapide)
+    //  MÉTHODES SIMPLES (pour utilisation rapide):
+	//2.methodes generi(post,get,...)
     // ═══════════════════════════════════════════════════════════
 
     // POST simple avec body JSON
